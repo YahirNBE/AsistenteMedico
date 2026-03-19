@@ -1,0 +1,77 @@
+{
+  "saludos": {
+    "keywords": ["hola", "buenos días", "buenos dias", "buenas noches", "buenas noches", "qué tal", "que tal", "cómo estás", "como estas", "¿cómo estás?", "¿como estas?"],
+    "respuesta": "¡Hola! Bienvenido al Asistente Médico Virtual. Cuéntame, ¿qué síntomas tienes o cómo te sientes hoy?"
+  },
+  "fiebre": {
+    "keywords": ["fiebre", "temperatura", "calentura", "tengo calentura"],
+    "respuesta": "Para estos síntomas, se recomienda reposo, hidratación constante y monitorear la temperatura. Si persiste por más de 3 días, acude a un médico."
+  },
+  "dolor_cabeza": {
+    "keywords": ["dolor de cabeza", "migraña", "cefalea", "me duele la cabeza"],
+    "respuesta": "Podría tratarse de estrés, fatiga o deshidratación. Descansa, hidrátate y evita luces fuertes. Si el dolor es muy intenso o recurrente, consulta a un médico."
+  },
+  "malestar": {
+    "keywords": ["malestar", "náusea", "mareo", "vómito", "indisposición", "me siento mal"],
+    "respuesta": "Puede ser por cansancio, deshidratación o estrés. Descansa, bebe agua lentamente y, si empeora o no mejora en unas horas, consulta a un médico."
+  },
+  "tos": {
+    "keywords": ["tos", "mucha tos", "tengo tos", "toser", "garganta"],
+    "respuesta": "La tos puede ser por una infección viral, alergia o irritación. Bebe agua tibia, descansa y evita irritantes. Si persiste más de una semana o hay fiebre asociada, consulta a un médico."
+  },
+  "resfriado": {
+    "keywords": ["resfriado", "catarro", "congestión", "congestión nasal", "nariz tapada"],
+    "respuesta": "Podría ser un resfriado común. Se recomienda reposo, hidratación, usar un humidificador y tomar vitamina C. Debería mejorar en 7-10 días. Si empeora, consulta a un médico."
+  },
+  "diarrea": {
+    "keywords": ["diarrea", "digestión", "dolor de estómago", "dolores estomacales", "vientre"],
+    "respuesta": "Procura mantenerte hidratado, come alimentos ligeros (arroz, plátano, pan tostado) y evita alimentos grasosos. Si persiste más de 2 días o hay sangre, busca atención médica."
+  },
+  "emergencia": {
+    "keywords": [
+      "no puedo respirar",
+      "desmayo",
+      "convulsión",
+      "emergencia",
+      "emergencia médica",
+      "emergencia medica",
+      "urgencia",
+      "llamar al 911",
+      "911",
+      "pecho",
+      "infarto",
+      "accidente"
+    ],
+    "respuesta": "⚠️ Esto puede ser una emergencia. Sigue estos pasos:\n1) Mantén la calma y respira despacio.\n2) Llama al 911 (o al número de emergencias local) de inmediato.\n3) Explica claramente qué te pasa (síntomas, ubicación, personas involucradas).\n4) Si estás con alguien, pídele que te ayude mientras esperas.\n5) No te muevas si crees que hay una lesión en la cabeza, cuello o espalda."
+  },
+  "primeros_auxilios": {
+    "keywords": ["herida", "sangrado", "corte", "lesión", "quemadura"],
+    "respuesta": "Aplica presión directa sobre la herida con un paño limpio. Para quemaduras, enjuaga con agua fría. Si el sangrado no se detiene en 10 minutos o es una herida profunda, busca ayuda médica."
+  },
+  "dudas": {
+    "keywords": [
+      "no entiendo",
+      "explica más",
+      "cuéntame más",
+      "cuenta me mas",
+      "cuál es la diferencia",
+      "cual es la diferencia",
+      "¿qué es?",
+      "que es",
+      "dudas sobre",
+      "duda sobre",
+      "duda si",
+      "¿cómo sé si?",
+      "como se si"
+    ],
+    "respuesta": "Entendido. Puedo ayudarte a aclarar síntomas específicos. Cuéntame más detalles sobre lo que sientes (cuándo comenzó, si hay otros síntomas, si has tomado algo) y haré mi mejor esfuerzo por guiarte."
+  },
+  "despedidas": {
+    "keywords": ["gracias", "muchas gracias", "gracias por ayudar", "adios", "adiós", "chao", "ciao", "hasta luego", "nos vemos", "cuídate", "cuidate"],
+    "respuesta": "¡De nada! Cuida tu salud y recuerda que, ante cualquier preocupación, siempre es mejor consultar con un profesional de salud. ¡Que te mejores pronto! 💙"
+  },
+  "ayuda": {
+    "keywords": ["ayuda", "puedo preguntar", "qué puedo preguntar", "que puedo preguntar", "cómo funciona", "como funciona", "instrucciones"],
+    "respuesta": "Claro, soy aquí para ayudarte. Puedes:\n1) Describir tus síntomas (ej: 'Tengo tos y fiebre')\n2) Preguntar sobre dudas específicas de salud\n3) Pedir consejos de primeros auxilios\n4) Reportar una emergencia diciendo '911' o 'emergencia'\n¡Adelante, cuéntame qué te preocupa!"
+  }
+}

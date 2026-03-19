@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Asistente Médico Virtual</title>
+
+<style>
+body {
+  font-family: Arial;
+  background: linear-gradient(to right, #6a5acd, #7b68ee);
+}
+
+.container {
+  width: 500px;
+  margin: 40px auto;
+  background: white;
+  border-radius: 15px;
+  overflow: hidden;
+}
+
+.header {
+  background: #2d6cdf;
+  color: white;
+  padding: 20px;
+  text-align: center;
+}
+
+.quick-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 15px;
+  flex-wrap: wrap;
+}
+
+.quick-btn {
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  padding: 8px 12px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 12px;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.quick-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.alert {
+  background: red;
+  color: white;
+  padding: 10px;
+  text-align: center;
+}
+
+.chat {
+  height: 300px;
+  overflow-y: auto;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.message {
+  display: flex;
+  margin-bottom: 10px;
+}
+
+.message.user {
+  justify-content: flex-end;
+}
+
+.message.bot {
+  justify-content: flex-start;
+}
+
+.message-content {
+  max-width: 70%;
+  padding: 10px 15px;
+  border-radius: 18px;
+  position: relative;
+  word-wrap: break-word;
+}
+
+.message.user .message-content {
+  background: #007bff;
+  color: white;
+  border-bottom-right-radius: 5px;
+}
+
+.message.bot .message-content {
+  background: #f1f1f1;
+  color: #333;
+  border-bottom-left-radius: 5px;
+}
+
+.message-icon {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  margin: 0 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+}
+
+.message.user .message-icon {
+  background: #007bff;
+  color: white;
+  order: 2;
+}
+
+.message.bot .message-icon {
+  background: #28a745;
+  color: white;
+  order: 1;
+}
+
+.input-area {
+  display: flex;
+  padding: 10px;
+}
+
+input {
+  flex: 1;
+  padding: 10px;
+}
+
+button {
+  background: #2ecc71;
+  color: white;
+  border: none;
+  padding: 10px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+  <div class="header">
+    <h2>Asistente Médico Virtual</h2>
+    <div class="quick-buttons">
+      <button class="quick-btn" onclick="enviarRapido('emergencia')">🚨 Emergencia</button>
+      <button class="quick-btn" onclick="enviarRapido('fiebre')">🌡️ Fiebre</button>
+      <button class="quick-btn" onclick="enviarRapido('dolor de cabeza')">🤕 Dolor Cabeza</button>
+      <button class="quick-btn" onclick="enviarRapido('ayuda')">❓ Ayuda</button>
+    </div>
+  </div>
+
+  <div class="alert">
+    ¿Es una emergencia? Llama al 911
+  </div>
+
+  <div id="chat" class="chat"></div>
+
+  <div class="input-area">
+    <input id="msg" placeholder="Describe tus síntomas...">
+    <button onclick="enviar()">Enviar</button>
+  </div>
+</div>
+
+<script>
+async function enviar() {
+  let input = document.getElementById("msg").value;
+
+  document.getElementById("chat").innerHTML += "<p><b>Tú:</b> " + input + "</p>";
+
+  const res = await fetch("http://127.0.0.1:5000/chat", {
+    method: "POST",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify({mensaje: input})
+  });
+
+  const data = await res.json();
+
+  const respuestaFormateada = data.respuesta.replace(/\n/g, "<br>");
+  document.getElementById("chat").innerHTML += "<p><b>IA:</b> " + respuestaFormateada + "</p>";
+
+  document.getElementById("msg").value = "";
+}
+</script>
+
+</body>
+</html>
