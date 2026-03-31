@@ -1,192 +1,400 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-<meta charset="UTF-8">
-<title>Asistente Médico Virtual</title>
+  <meta charset="UTF-8">
+  <title>Asistente Médico Virtual</title>
 
-<style>
-body {
-  font-family: Arial;
-  background: linear-gradient(to right, #6a5acd, #7b68ee);
-}
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      margin: 0;
+      padding: 20px;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
 
-.container {
-  width: 500px;
-  margin: 40px auto;
-  background: white;
-  border-radius: 15px;
-  overflow: hidden;
-}
+    .container {
+      width: 100%;
+      max-width: 600px;
+      margin: 0 auto;
+      background: #ffffff;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
 
-.header {
-  background: #2d6cdf;
-  color: white;
-  padding: 20px;
-  text-align: center;
-}
+    .header {
+      background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+      color: white;
+      padding: 25px 20px;
+      text-align: center;
+      position: relative;
+    }
 
-.quick-buttons {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-  margin-top: 15px;
-  flex-wrap: wrap;
-}
+    .header h2 {
+      margin: 0 0 15px 0;
+      font-size: 24px;
+      font-weight: 600;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
 
-.quick-btn {
-  background: rgba(255, 255, 255, 0.2);
-  color: white;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  padding: 8px 12px;
-  border-radius: 20px;
-  cursor: pointer;
-  font-size: 12px;
-  transition: all 0.3s ease;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
+    .quick-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 15px;
+      flex-wrap: wrap;
+    }
 
-.quick-btn:hover {
-  background: rgba(255, 255, 255, 0.3);
-  transform: translateY(-1px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
+    .quick-btn {
+      background: rgba(255, 255, 255, 0.15);
+      color: white;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      padding: 10px 16px;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-size: 14px;
+      font-weight: 500;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      backdrop-filter: blur(10px);
+    }
 
-.alert {
-  background: red;
-  color: white;
-  padding: 10px;
-  text-align: center;
-}
+    .quick-btn:hover {
+      background: rgba(255, 255, 255, 0.25);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    }
 
-.chat {
-  height: 300px;
-  overflow-y: auto;
-  padding: 10px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
+    .quick-btn:active {
+      transform: translateY(0);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
 
-.message {
-  display: flex;
-  margin-bottom: 10px;
-}
+    .alert {
+      background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+      color: white;
+      padding: 12px 20px;
+      text-align: center;
+      font-weight: 500;
+      font-size: 14px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    }
 
-.message.user {
-  justify-content: flex-end;
-}
+    .chat {
+      height: 400px;
+      overflow-y: auto;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      background: #f8f9fa;
+    }
 
-.message.bot {
-  justify-content: flex-start;
-}
+    .message {
+      display: flex;
+      margin-bottom: 5px;
+      animation: fadeIn 0.3s ease-in;
+    }
 
-.message-content {
-  max-width: 70%;
-  padding: 10px 15px;
-  border-radius: 18px;
-  position: relative;
-  word-wrap: break-word;
-}
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
 
-.message.user .message-content {
-  background: #007bff;
-  color: white;
-  border-bottom-right-radius: 5px;
-}
+    .message.user {
+      justify-content: flex-end;
+    }
 
-.message.bot .message-content {
-  background: #f1f1f1;
-  color: #333;
-  border-bottom-left-radius: 5px;
-}
+    .message.bot {
+      justify-content: flex-start;
+    }
 
-.message-icon {
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  margin: 0 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 14px;
-}
+    .message-content {
+      max-width: 75%;
+      padding: 12px 18px;
+      border-radius: 18px;
+      position: relative;
+      word-wrap: break-word;
+      font-size: 15px;
+      line-height: 1.4;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    }
 
-.message.user .message-icon {
-  background: #007bff;
-  color: white;
-  order: 2;
-}
+    .message.user .message-content {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      border-bottom-right-radius: 5px;
+    }
 
-.message.bot .message-icon {
-  background: #28a745;
-  color: white;
-  order: 1;
-}
+    .message.bot .message-content {
+      background: white;
+      color: #333;
+      border-bottom-left-radius: 5px;
+      border: 1px solid #e9ecef;
+    }
 
-.input-area {
-  display: flex;
-  padding: 10px;
-}
+    .message-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      margin: 0 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
 
-input {
-  flex: 1;
-  padding: 10px;
-}
+    .message.user .message-icon {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      order: 2;
+    }
 
-button {
-  background: #2ecc71;
-  color: white;
-  border: none;
-  padding: 10px;
-}
-</style>
+    .message.bot .message-icon {
+      background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+      color: white;
+      order: 1;
+    }
+
+    .input-area {
+      display: flex;
+      padding: 20px;
+      background: white;
+      border-top: 1px solid #e9ecef;
+      gap: 10px;
+    }
+
+    input {
+      flex: 1;
+      padding: 12px 18px;
+      border: 2px solid #e9ecef;
+      border-radius: 25px;
+      font-size: 15px;
+      transition: border-color 0.3s ease;
+      outline: none;
+    }
+
+    input:focus {
+      border-color: #667eea;
+      box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    }
+
+    button {
+      background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 25px;
+      cursor: pointer;
+      font-size: 15px;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    button:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    button:active {
+      transform: translateY(0);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .categoria-btn {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      margin: 4px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .categoria-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      body {
+        padding: 10px;
+      }
+      
+      .container {
+        max-width: 100%;
+      }
+      
+      .header h2 {
+        font-size: 20px;
+      }
+      
+      .quick-buttons {
+        gap: 8px;
+      }
+      
+      .quick-btn {
+        padding: 8px 12px;
+        font-size: 12px;
+      }
+      
+      .chat {
+        height: 350px;
+        padding: 15px;
+      }
+      
+      .message-content {
+        max-width: 85%;
+        font-size: 14px;
+      }
+      
+      .input-area {
+        padding: 15px;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
-<div class="container">
-  <div class="header">
-    <h2>Asistente Médico Virtual</h2>
-    <div class="quick-buttons">
-      <button class="quick-btn" onclick="enviarRapido('emergencia')">🚨 Emergencia</button>
-      <button class="quick-btn" onclick="enviarRapido('fiebre')">🌡️ Fiebre</button>
-      <button class="quick-btn" onclick="enviarRapido('dolor de cabeza')">🤕 Dolor Cabeza</button>
-      <button class="quick-btn" onclick="enviarRapido('ayuda')">❓ Ayuda</button>
+  <div class="container">
+    <div class="header">
+      <h2>Asistente Médico Virtual</h2>
+      <div class="quick-buttons">
+        <button class="quick-btn" onclick="enviarRapido('emergencia')">🚨 Emergencia</button>
+        <button class="quick-btn" onclick="enviarRapido('fiebre')">🌡️ Fiebre</button>
+        <button class="quick-btn" onclick="enviarRapido('dolor de cabeza')">🤕 Dolor Cabeza</button>
+        <button class="quick-btn" onclick="enviarRapido('ayuda')">❓ Ayuda</button>
+      </div>
+    </div>
+
+    <div class="alert">
+      ¿Es una emergencia? Llama al 911
+    </div>
+
+    <div id="chat" class="chat"></div>
+
+    <div class="input-area">
+      <input id="msg" placeholder="Describe tus síntomas...">
+      <button onclick="enviar()">Enviar</button>
     </div>
   </div>
 
-  <div class="alert">
-    ¿Es una emergencia? Llama al 911
-  </div>
+  <script>
+    // Función para agregar mensajes al chat
+    function agregarMensaje(texto, tipo) {
+      const chat = document.getElementById("chat");
+      const messageDiv = document.createElement("div");
+      messageDiv.className = `message ${tipo}`;
 
-  <div id="chat" class="chat"></div>
+      const icon = tipo === "user" ? "👤" : "🤖";
+      const iconDiv = document.createElement("div");
+      iconDiv.className = "message-icon";
+      iconDiv.textContent = icon;
 
-  <div class="input-area">
-    <input id="msg" placeholder="Describe tus síntomas...">
-    <button onclick="enviar()">Enviar</button>
-  </div>
-</div>
+      const contentDiv = document.createElement("div");
+      contentDiv.className = "message-content";
+      contentDiv.innerHTML = texto;
 
-<script>
-async function enviar() {
-  let input = document.getElementById("msg").value;
+      messageDiv.appendChild(iconDiv);
+      messageDiv.appendChild(contentDiv);
+      chat.appendChild(messageDiv);
 
-  document.getElementById("chat").innerHTML += "<p><b>Tú:</b> " + input + "</p>";
+      // Scroll al final
+      chat.scrollTop = chat.scrollHeight;
+    }
 
-  const res = await fetch("http://127.0.0.1:5000/chat", {
-    method: "POST",
-    headers: {"Content-Type": "application/json"},
-    body: JSON.stringify({mensaje: input})
-  });
+    // Función para seleccionar categoría cuando la IA no sabe
+    async function seleccionarCategoria(mensaje, categoria) {
+      try {
+        const res = await fetch("http://127.0.0.1:5000/aprender", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ mensaje: mensaje, categoria: categoria })
+        });
 
-  const data = await res.json();
+        const data = await res.json();
 
-  const respuestaFormateada = data.respuesta.replace(/\n/g, "<br>");
-  document.getElementById("chat").innerHTML += "<p><b>IA:</b> " + respuestaFormateada + "</p>";
+        // Mostrar mensaje de aprendizaje
+        agregarMensaje(`✅ ${data.mensaje}`, "bot");
 
-  document.getElementById("msg").value = "";
-}
-</script>
+      } catch (error) {
+        agregarMensaje("❌ Error al aprender. Intenta de nuevo.", "bot");
+        console.error("Error:", error);
+      }
+    }
+
+    // Función principal para enviar
+    async function enviar() {
+      let input = document.getElementById("msg").value.trim();
+      if (!input) return;
+
+      // Agregar mensaje del usuario
+      agregarMensaje(input, "user");
+
+      try {
+        const res = await fetch("http://127.0.0.1:5000/chat", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ mensaje: input })
+        });
+
+        const data = await res.json();
+
+        let respuestaHTML = data.respuesta;
+
+        // Si hay opciones, mostrar botones para seleccionar categoría
+        if (data.opciones) {
+          respuestaHTML += "<br><br><strong>Selecciona la categoría correcta:</strong><br>";
+          data.opciones.forEach(opcion => {
+            respuestaHTML += `<button class="categoria-btn" onclick="seleccionarCategoria('${input}', '${opcion}')">${opcion}</button> `;
+          });
+        } else {
+          // Agregar info de IA solo si no hay opciones
+          respuestaHTML += `<br><small style="color: #666; font-size: 0.8em;">
+            📊 ${data.categoria} (${(data.probabilidad * 100).toFixed(1)}%)
+          </small>`;
+        }
+
+        // Agregar respuesta del bot
+        agregarMensaje(respuestaHTML, "bot");
+
+      } catch (error) {
+        agregarMensaje("❌ Error de conexión. Intenta de nuevo.", "bot");
+        console.error("Error:", error);
+      }
+
+      // Limpiar input
+      document.getElementById("msg").value = "";
+    }
+
+    // Enviar con Enter
+    document.getElementById("msg").addEventListener("keypress", function(e) {
+      if (e.key === "Enter") {
+        enviar();
+      }
+    });
+
+    // Función para botones rápidos
+    function enviarRapido(texto) {
+      document.getElementById("msg").value = texto;
+      enviar();
+    }
+  </script>
 
 </body>
+
 </html>
